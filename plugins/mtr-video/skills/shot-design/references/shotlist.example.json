@@ -1,0 +1,693 @@
+{
+  "version": "1.0",
+  "project": "nha-cu",
+  "film": {
+    "aspect_ratio": "2.39:1",
+    "fps": 24,
+    "target_runtime_s": 240,
+    "genre": "drama",
+    "platform": "festival",
+    "asl_target_s": 4.5,
+    "lighting_arc": "warm 2:1 home → cold 6:1 by end",
+    "lens_family": [
+      32,
+      50,
+      85
+    ],
+    "gen_ratio": "21:9",
+    "video_model": "seedance-2.5"
+  },
+  "characters": [
+    {
+      "id": "C01",
+      "name": "Lan",
+      "identity_anchor": "Vietnamese woman, 34, shoulder-length black hair tucked behind left ear, thin silver hoop earrings, faded navy cardigan over white tee",
+      "reference_images": [
+        "02_bible/refs/char/C01/C01_id_front_v01.png",
+        "02_bible/refs/char/C01/C01_id_34L_v01.png",
+        "02_bible/refs/char/C01/C01_outfitA_v01.png"
+      ],
+      "wardrobe_state_default": "cardigan buttoned",
+      "height_m": 1.58,
+      "identity_block": "Vietnamese woman, 34, shoulder-length black hair tucked behind left ear, thin silver hoop earrings, faded navy cardigan over white tee",
+      "costume_block": "cardigan buttoned"
+    },
+    {
+      "id": "C02",
+      "name": "Minh",
+      "identity_anchor": "Vietnamese man, 27, short messy hair, stubble, grey hoodie sleeves pushed up",
+      "reference_images": [
+        "02_bible/refs/char/C02/C02_id_front_v01.png",
+        "02_bible/refs/char/C02/C02_id_34L_v01.png",
+        "02_bible/refs/char/C02/C02_outfitA_v01.png"
+      ],
+      "wardrobe_state_default": "hood down",
+      "height_m": 1.72,
+      "identity_block": "Vietnamese man, 27, short messy hair, stubble, grey hoodie sleeves pushed up",
+      "costume_block": "hood down"
+    }
+  ],
+  "scenes": [
+    {
+      "id": "S01",
+      "location": "small tiled kitchen, old Hanoi apartment",
+      "time_of_day": "night",
+      "interior": true,
+      "pov_owner": "C02",
+      "camera_stance": "objective_to_subjective",
+      "information_strategy": "suspense",
+      "breakdown": {
+        "conflict": "Lan needs Minh's signature to sell the family house; Minh wants things to stay as they were",
+        "opening_value": "closeness (+)",
+        "closing_value": "betrayal (-)",
+        "turning_point_beat": "B03",
+        "beats": [
+          {
+            "id": "B01",
+            "summary": "Lan washes a cup slowly while Minh eats",
+            "intentions": [
+              {
+                "character": "C01",
+                "objective": "make Minh feel at ease before the news",
+                "action_verb": "soothe",
+                "physical_task": "wash the same cup twice",
+                "status": "equal"
+              },
+              {
+                "character": "C02",
+                "objective": "keep the evening normal",
+                "action_verb": "tease",
+                "status": "equal"
+              }
+            ]
+          },
+          {
+            "id": "B02",
+            "summary": "Lan slides the folder across the table",
+            "intentions": [
+              {
+                "character": "C01",
+                "objective": "get the signature without a fight",
+                "action_verb": "slip it past him",
+                "fact": "the buyer's deadline is tomorrow",
+                "status": "rising"
+              }
+            ]
+          },
+          {
+            "id": "B03",
+            "summary": "Minh reads the word 'sale' and understands",
+            "is_turning_point": true,
+            "intentions": [
+              {
+                "character": "C02",
+                "objective": "make her take it back",
+                "action_verb": "test her",
+                "subtext": "mother's voice in this kitchen",
+                "status": "falling"
+              }
+            ]
+          }
+        ]
+      },
+      "blocking": {
+        "pattern": "l",
+        "marks": [
+          {
+            "character": "C01",
+            "mark_id": "C01_sink",
+            "position_m": [
+              1.2,
+              2.0,
+              0
+            ],
+            "facing_deg": 180,
+            "pose": "standing"
+          },
+          {
+            "character": "C01",
+            "mark_id": "C01_table",
+            "position_m": [
+              0.4,
+              0.8,
+              0
+            ],
+            "facing_deg": 90,
+            "pose": "standing"
+          },
+          {
+            "character": "C02",
+            "mark_id": "C02_table",
+            "position_m": [
+              -0.6,
+              0.8,
+              0
+            ],
+            "facing_deg": 270,
+            "pose": "sitting"
+          }
+        ]
+      },
+      "axis": {
+        "from": "C01",
+        "to": "C02",
+        "camera_side": "left_of_axis"
+      },
+      "lighting": {
+        "key_style": "naturalistic",
+        "key_fill_ratio": "3:1",
+        "motivated_source": "single tungsten pendant bulb over table + cold streetlight through window",
+        "source_direction": "top",
+        "key_side": "short_side",
+        "key_quality": "soft",
+        "key_kelvin": 3000,
+        "ambient_kelvin": 7000,
+        "practicals": [
+          "pendant bulb",
+          "fridge light when opened"
+        ],
+        "atmosphere": "none"
+      },
+      "location_id": "LOC01",
+      "props": [
+        {
+          "id": "PR01",
+          "state": "blue folder, closed"
+        },
+        {
+          "id": "PR02",
+          "state": "bowl of pho, half eaten"
+        }
+      ]
+    }
+  ],
+  "units": [
+    {
+      "id": "U01",
+      "scene": "S01",
+      "shot_ids": [
+        "S01_010",
+        "S01_020",
+        "S01_030"
+      ],
+      "duration_s": 17.5,
+      "priority": "standard",
+      "reference_mode": "previs_video_ref",
+      "previs_ref": "04_previs/U01/v001/AFS_U01_clay_v001.mp4",
+      "continuity_anchors": {
+        "characters_in_frame": [
+          "C01",
+          "C02"
+        ],
+        "screen_positions": {
+          "C01": "frame_right",
+          "C02": "frame_left"
+        },
+        "wardrobe_state": "Lan cardigan buttoned; Minh hood down, sleeves up",
+        "prop_state": "half-eaten bowl of pho in front of Minh; blue folder under Lan's arm from S01_020",
+        "lighting_state": "pendant on, warm 3000K key from top, cool window fill camera-left"
+      },
+      "handoff_out": "Lan's hand releasing the blue folder on the table, centered between them",
+      "mouth_map": [
+        {
+          "character": "C02",
+          "talk_s": [
+            1.0,
+            3.0
+          ]
+        },
+        {
+          "character": "C01",
+          "talk_s": [
+            11.0,
+            12.8
+          ]
+        }
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "U02",
+      "scene": "S01",
+      "shot_ids": [
+        "S01_040",
+        "S01_050",
+        "S01_060"
+      ],
+      "duration_s": 15.5,
+      "priority": "hero",
+      "reference_mode": "previs_video_ref",
+      "previs_ref": "04_previs/U02/v001/AFS_U02_clay_v001.mp4",
+      "continuity_anchors": {
+        "characters_in_frame": [
+          "C01",
+          "C02"
+        ],
+        "screen_positions": {
+          "C01": "frame_right",
+          "C02": "frame_left"
+        },
+        "wardrobe_state": "same as U01",
+        "prop_state": "blue folder open on table, page 1 visible; bowl pushed aside",
+        "lighting_state": "same as U01"
+      },
+      "handoff_in": "folder already on table, Lan's hand just leaving it",
+      "status": "planned"
+    }
+  ],
+  "shots": [
+    {
+      "id": "S01_010",
+      "scene": "S01",
+      "unit": "U01",
+      "beat": "B01",
+      "unit_time_s": [
+        0.0,
+        6.5
+      ],
+      "duration_s": 6.5,
+      "handle_s": 0,
+      "purpose": "Geography + a warm normal evening that is about to break",
+      "type": "master",
+      "size": "ws",
+      "angle": "eye_level",
+      "camera_height_m": 1.4,
+      "lens_mm": 32,
+      "dof": "deep",
+      "camera": {
+        "move": "static",
+        "rig": "tripod",
+        "motivation": {
+          "type": "none_static",
+          "reason": "observe the routine before it breaks"
+        }
+      },
+      "composition": {
+        "subject_position": "left_third",
+        "lead_room": "normal",
+        "depth_layers": [
+          "fg: table edge with bowl",
+          "mg: Minh seated",
+          "bg: Lan at sink, back to camera"
+        ],
+        "frame_in_frame": true,
+        "eye_trace_out": "mr"
+      },
+      "action": {
+        "primary": "Lan rinses a cup at the sink; Minh eats and talks over his shoulder",
+        "complexity": "low",
+        "screen_direction": "none",
+        "dialogue": "You've washed that cup three times already.",
+        "speaker": "C02"
+      },
+      "eyeline": {
+        "character": "C02",
+        "target": "C01",
+        "side_of_lens": "right"
+      },
+      "performance": {
+        "character": "C01",
+        "intention": "soothe him by keeping busy",
+        "subtext": "delaying the news",
+        "observable_behavior": [
+          "back to camera",
+          "slow repetitive rinsing",
+          "shoulders slightly raised"
+        ],
+        "intensity": 2,
+        "avoid": [
+          "turning to camera",
+          "sighing loudly"
+        ]
+      },
+      "edit": {
+        "cut_in": "fade_in",
+        "cut_out": "cut",
+        "coverage_alt": []
+      },
+      "ai_risk": [
+        "camera_drift"
+      ]
+    },
+    {
+      "id": "S01_020",
+      "scene": "S01",
+      "unit": "U01",
+      "beat": "B01",
+      "unit_time_s": [
+        6.5,
+        10.0
+      ],
+      "duration_s": 3.5,
+      "purpose": "Lan decides to act",
+      "type": "single",
+      "size": "mcu",
+      "angle": "eye_level",
+      "camera_height_m": 1.5,
+      "lens_mm": 50,
+      "dof": "medium",
+      "camera": {
+        "move": "static",
+        "rig": "tripod",
+        "motivation": {
+          "type": "none_static",
+          "reason": "hold on the decision"
+        }
+      },
+      "composition": {
+        "subject_position": "right_third",
+        "lead_room": "normal",
+        "eye_trace_in": "mr",
+        "eye_trace_out": "mr"
+      },
+      "action": {
+        "primary": "Lan turns off the tap and stays still",
+        "complexity": "low",
+        "screen_direction": "none"
+      },
+      "eyeline": {
+        "character": "C01",
+        "target": "off_left",
+        "side_of_lens": "left"
+      },
+      "performance": {
+        "character": "C01",
+        "intention": "brace herself",
+        "observable_behavior": [
+          "hand stays on tap after it closes",
+          "one slow inhale, shoulders drop on exhale",
+          "eyes fixed down at the sink"
+        ],
+        "facs_aus": [
+          "AU24",
+          "AU17"
+        ],
+        "intensity": 2,
+        "thought_complete_at_s": 9.5,
+        "avoid": [
+          "tears",
+          "looking at lens"
+        ]
+      },
+      "edit": {
+        "cut_in": "cut",
+        "cut_out": "match_on_action"
+      },
+      "ai_risk": [
+        "identity_drift"
+      ]
+    },
+    {
+      "id": "S01_030",
+      "scene": "S01",
+      "unit": "U01",
+      "beat": "B02",
+      "unit_time_s": [
+        10.0,
+        17.5
+      ],
+      "duration_s": 7.0,
+      "handle_s": 0.5,
+      "purpose": "The folder enters their space",
+      "type": "two_shot",
+      "size": "ms",
+      "angle": "eye_level",
+      "camera_height_m": 1.2,
+      "lens_mm": 50,
+      "dof": "medium",
+      "camera": {
+        "move": "static",
+        "rig": "tripod",
+        "motivation": {
+          "type": "none_static",
+          "reason": "let the blocking change carry the beat"
+        }
+      },
+      "composition": {
+        "subject_position": "center",
+        "lead_room": "normal",
+        "depth_layers": [
+          "Minh frame-left seated",
+          "Lan enters frame-right, stands"
+        ],
+        "eye_trace_out": "bc"
+      },
+      "action": {
+        "primary": "Lan walks to the table and slides a blue folder toward Minh",
+        "complexity": "medium",
+        "screen_direction": "r_to_l",
+        "dialogue": "Sign this for me, would you?",
+        "speaker": "C01"
+      },
+      "eyeline": {
+        "character": "C01",
+        "target": "folder",
+        "side_of_lens": "below"
+      },
+      "performance": {
+        "character": "C01",
+        "intention": "slip it past him casually",
+        "observable_behavior": [
+          "light tone, avoids his eyes",
+          "fingers rest on folder a beat too long"
+        ],
+        "intensity": 2
+      },
+      "edit": {
+        "cut_in": "match_on_action",
+        "cut_out": "cut",
+        "coverage_alt": [
+          "S01_030b insert: folder slides into frame"
+        ]
+      },
+      "continuity": {
+        "props": "folder in Lan's right hand, blue, A4"
+      },
+      "ai_risk": [
+        "hands",
+        "multi_subject_contact"
+      ]
+    },
+    {
+      "id": "S01_040",
+      "scene": "S01",
+      "unit": "U02",
+      "beat": "B03",
+      "unit_time_s": [
+        0.0,
+        3.0
+      ],
+      "duration_s": 3.0,
+      "purpose": "The word Minh reads",
+      "type": "insert",
+      "size": "ecu",
+      "angle": "high",
+      "camera_height_m": 1.1,
+      "lens_mm": 85,
+      "dof": "shallow",
+      "camera": {
+        "move": "static",
+        "rig": "tripod",
+        "motivation": {
+          "type": "pov",
+          "reason": "Minh's POV on the page"
+        }
+      },
+      "composition": {
+        "subject_position": "center",
+        "eye_trace_in": "bc",
+        "eye_trace_out": "mc"
+      },
+      "action": {
+        "primary": "Minh's thumb stops beside the printed words 'SALE AND PURCHASE CONTRACT'",
+        "complexity": "low",
+        "screen_direction": "none"
+      },
+      "performance": {
+        "character": "C02",
+        "intention": "check he read it right",
+        "observable_behavior": [
+          "thumb freezes",
+          "page edge trembles slightly"
+        ],
+        "intensity": 2
+      },
+      "edit": {
+        "cut_in": "cut",
+        "cut_out": "cut"
+      },
+      "ai_risk": [
+        "text",
+        "hands"
+      ]
+    },
+    {
+      "id": "S01_050",
+      "scene": "S01",
+      "unit": "U02",
+      "beat": "B03",
+      "unit_time_s": [
+        3.0,
+        9.0
+      ],
+      "duration_s": 6.0,
+      "purpose": "Turning point: understanding lands on Minh",
+      "type": "single",
+      "size": "cu",
+      "angle": "eye_level",
+      "camera_height_m": 1.2,
+      "lens_mm": 85,
+      "dof": "shallow",
+      "camera": {
+        "move": "push_in",
+        "rig": "dolly",
+        "direction": "toward C02",
+        "speed": "imperceptible",
+        "motivation": {
+          "type": "emotion_turn",
+          "reason": "the only push-in of the scene: the news reaches him"
+        },
+        "move_starts_on": "Minh lifts eyes from page"
+      },
+      "composition": {
+        "subject_position": "left_third",
+        "lead_room": "normal",
+        "eye_trace_in": "mc",
+        "eye_trace_out": "ml"
+      },
+      "action": {
+        "primary": "Minh lifts his eyes from the page to Lan and holds",
+        "complexity": "low",
+        "screen_direction": "none",
+        "dialogue": "You're selling Mom's house?",
+        "speaker": "C02"
+      },
+      "eyeline": {
+        "character": "C02",
+        "target": "C01",
+        "side_of_lens": "right"
+      },
+      "performance": {
+        "character": "C02",
+        "intention": "test her — make her say it herself",
+        "subtext": "this kitchen is the last place mother's voice lives",
+        "observable_behavior": [
+          "eyes rise slowly, stop on her face",
+          "one slow blink",
+          "jaw tightens, lips press",
+          "speaks quietly, not shouting"
+        ],
+        "facs_aus": [
+          "AU1",
+          "AU4",
+          "AU24"
+        ],
+        "intensity": 3,
+        "micro_leak": {
+          "emotion": "grief",
+          "at_s": 5.0,
+          "dur_s": 0.4
+        },
+        "thought_complete_at_s": 8.5,
+        "avoid": [
+          "tears",
+          "raised voice",
+          "head shake"
+        ]
+      },
+      "edit": {
+        "cut_in": "cut",
+        "cut_out": "l_cut",
+        "audio_tail_s": 1.0,
+        "coverage_alt": [
+          "S01_050b static MCU same angle"
+        ]
+      },
+      "ai_risk": [
+        "lip_sync",
+        "identity_drift",
+        "eyeline"
+      ]
+    },
+    {
+      "id": "S01_060",
+      "scene": "S01",
+      "unit": "U02",
+      "beat": "B03",
+      "unit_time_s": [
+        9.0,
+        15.5
+      ],
+      "duration_s": 6.0,
+      "handle_s": 0.5,
+      "purpose": "Lan's non-answer — reaction under Minh's line",
+      "type": "reaction",
+      "size": "mcu",
+      "angle": "eye_level",
+      "camera_height_m": 1.5,
+      "lens_mm": 85,
+      "dof": "shallow",
+      "camera": {
+        "move": "static",
+        "rig": "tripod",
+        "motivation": {
+          "type": "none_static",
+          "reason": "she cannot escape the frame"
+        }
+      },
+      "composition": {
+        "subject_position": "right_third",
+        "lead_room": "short_sided",
+        "eye_trace_in": "mr"
+      },
+      "action": {
+        "primary": "Lan holds his gaze, then looks down at the folder",
+        "complexity": "low",
+        "screen_direction": "none"
+      },
+      "eyeline": {
+        "character": "C01",
+        "target": "C02",
+        "side_of_lens": "left"
+      },
+      "performance": {
+        "character": "C01",
+        "intention": "endure it without apologizing",
+        "observable_behavior": [
+          "holds eye contact 2s",
+          "swallows",
+          "eyes drop to folder",
+          "does not speak"
+        ],
+        "facs_aus": [
+          "AU17",
+          "AU24"
+        ],
+        "intensity": 2,
+        "avoid": [
+          "crying",
+          "opening mouth to speak"
+        ]
+      },
+      "edit": {
+        "cut_in": "l_cut",
+        "cut_out": "cut"
+      },
+      "ai_risk": [
+        "identity_drift"
+      ]
+    }
+  ],
+  "revision": 1,
+  "changelog": [
+    {
+      "revision": 1,
+      "date": "2026-10-02",
+      "change": "initial",
+      "units_affected": [
+        "U01",
+        "U02"
+      ]
+    }
+  ]
+}

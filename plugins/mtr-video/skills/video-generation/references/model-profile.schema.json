@@ -1,0 +1,424 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ai-film-studio/model-profile.schema.json",
+  "title": "video model profile",
+  "description": "Capabilities and limits of one video generation model. Every pipeline rule that depends on a model reads it from here, never from hard-coded numbers.",
+  "type": "object",
+  "required": [
+    "id",
+    "name",
+    "vendor",
+    "verified_as_of",
+    "verification",
+    "output",
+    "shots",
+    "references",
+    "control",
+    "audio",
+    "ingest"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9.\\-]*$",
+      "description": "Folder name under references/models/ and value of film.video_model"
+    },
+    "name": {
+      "type": "string"
+    },
+    "vendor": {
+      "type": "string"
+    },
+    "released": {
+      "type": "string"
+    },
+    "verified_as_of": {
+      "type": "string",
+      "description": "ISO date of the last check"
+    },
+    "verification": {
+      "enum": [
+        "official_docs",
+        "third_party_docs",
+        "calibrated",
+        "unverified"
+      ],
+      "description": "Weakest source behind the numbers below; 'calibrated' = confirmed by the project's own tests T1-T7"
+    },
+    "access": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "provider",
+          "kind"
+        ],
+        "properties": {
+          "provider": {
+            "type": "string"
+          },
+          "kind": {
+            "enum": [
+              "api",
+              "ui"
+            ]
+          },
+          "adapter": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Folder under scripts/adapters/ implementing build_request.py + client.py; null = manual UI workflow"
+          },
+          "price_usd_per_s": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "number"
+            },
+            "description": "Keyed by resolution, e.g. {\"480p\": 0.10, \"720p\": 0.23}"
+          },
+          "bills_reference_video_seconds": {
+            "type": "boolean"
+          },
+          "regions_excluded": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "notes": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "output": {
+      "type": "object",
+      "required": [
+        "fps",
+        "resolutions",
+        "ratios",
+        "duration_s"
+      ],
+      "properties": {
+        "fps": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "description": "Output frame rates the model produces"
+        },
+        "resolutions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "native_max_resolution": {
+          "type": "string"
+        },
+        "ratios": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "duration_s": {
+          "type": "object",
+          "required": [
+            "min",
+            "max"
+          ],
+          "properties": {
+            "min": {
+              "type": "number"
+            },
+            "max": {
+              "type": "number"
+            },
+            "allowed": {
+              "type": "array",
+              "items": {
+                "type": "number"
+              },
+              "description": "Set when only fixed durations exist (e.g. 5 or 10)"
+            }
+          }
+        },
+        "extension": {
+          "type": "boolean"
+        },
+        "container": {
+          "type": "string"
+        }
+      }
+    },
+    "shots": {
+      "type": "object",
+      "required": [
+        "multi_shot_in_call",
+        "min_shot_s",
+        "max_shots_per_call"
+      ],
+      "properties": {
+        "multi_shot_in_call": {
+          "type": "boolean",
+          "description": "Can one call contain several cuts (timecoded blocks)?"
+        },
+        "timecode_prompting": {
+          "type": "boolean"
+        },
+        "min_shot_s": {
+          "type": "number"
+        },
+        "max_shots_per_call": {
+          "type": "integer"
+        },
+        "timestamp_accuracy_s": {
+          "type": "number"
+        }
+      }
+    },
+    "references": {
+      "type": "object",
+      "required": [
+        "images_max",
+        "videos_max",
+        "audio_max"
+      ],
+      "properties": {
+        "images_max": {
+          "type": "integer"
+        },
+        "videos_max": {
+          "type": "integer"
+        },
+        "audio_max": {
+          "type": "integer"
+        },
+        "video_total_s_max": {
+          "type": "number"
+        },
+        "audio_total_s_max": {
+          "type": "number"
+        },
+        "audio_requires_image": {
+          "type": "boolean"
+        },
+        "recommended_images": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "recommended_videos": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "tag_regex": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Regex for in-prompt reference tags (e.g. @Image1); null if the model has no tag syntax"
+        },
+        "roles": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "control": {
+      "type": "object",
+      "properties": {
+        "first_frame": {
+          "type": "boolean"
+        },
+        "last_frame": {
+          "type": "boolean"
+        },
+        "returns_last_frame": {
+          "type": "boolean"
+        },
+        "video_reference_camera": {
+          "type": "boolean",
+          "description": "Follows camera/blocking from a reference video (previs playblast)"
+        },
+        "structure_reference": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "clay",
+              "depth",
+              "seg",
+              "pose",
+              "edges"
+            ]
+          }
+        },
+        "edit_by_timestamp": {
+          "type": "boolean"
+        },
+        "seed": {
+          "type": "boolean"
+        },
+        "camera_lock_param": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "audio": {
+      "type": "object",
+      "required": [
+        "native"
+      ],
+      "properties": {
+        "native": {
+          "type": "boolean"
+        },
+        "dialogue_lip_sync": {
+          "type": "boolean"
+        },
+        "sample_rate_hz": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "languages_claimed": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "languages_tested": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "prompt": {
+      "type": "object",
+      "properties": {
+        "template": {
+          "type": "string",
+          "description": "Section order, e.g. FORMAT>REFERENCES>WORLD>TIMELINE>LOOK>AUDIO>KEEP>AVOID"
+        },
+        "words_per_block": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "max_words_per_dialogue_line": {
+          "type": "integer"
+        },
+        "dialogue_format": {
+          "type": "string"
+        },
+        "language_notes": {
+          "type": "string"
+        },
+        "negative_prompt_field": {
+          "type": "boolean"
+        }
+      }
+    },
+    "policy": {
+      "type": "object",
+      "properties": {
+        "real_faces": {
+          "enum": [
+            "allowed",
+            "blocked",
+            "asset_library_only",
+            "unknown"
+          ]
+        },
+        "photoreal_ai_faces": {
+          "enum": [
+            "allowed",
+            "sometimes_blocked",
+            "blocked",
+            "unknown"
+          ]
+        },
+        "ip_characters": {
+          "enum": [
+            "allowed",
+            "blocked",
+            "unknown"
+          ]
+        },
+        "watermark": {
+          "type": "string"
+        },
+        "c2pa": {
+          "type": "boolean"
+        },
+        "commercial_use": {
+          "type": "string"
+        }
+      }
+    },
+    "ingest": {
+      "type": "object",
+      "properties": {
+        "extra_frames": {
+          "type": "integer"
+        },
+        "resample_audio_hz": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "url_expiry_h": {
+          "type": [
+            "number",
+            "null"
+          ]
+        }
+      }
+    },
+    "known_weaknesses": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "open_questions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "test": {
+            "type": "string"
+          },
+          "question": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "knowledge": {
+      "type": "string",
+      "description": "Relative path to the model's knowledge file"
+    }
+  }
+}

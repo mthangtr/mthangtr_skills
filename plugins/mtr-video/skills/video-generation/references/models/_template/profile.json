@@ -1,0 +1,22 @@
+{
+  "id": "model-id",
+  "name": "Model name and version",
+  "vendor": "Vendor",
+  "released": "YYYY-MM-DD",
+  "verified_as_of": "YYYY-MM-DD",
+  "verification": "unverified",
+  "access": [
+    {"provider": "Provider", "kind": "api", "adapter": null, "price_usd_per_s": {"720p": 0.0}, "bills_reference_video_seconds": false, "regions_excluded": [], "notes": ""}
+  ],
+  "output": {"fps": [24], "resolutions": ["720p"], "native_max_resolution": "720p", "ratios": ["16:9", "9:16"], "duration_s": {"min": 5, "max": 10}, "extension": false, "container": "mp4"},
+  "shots": {"multi_shot_in_call": false, "timecode_prompting": false, "min_shot_s": 2, "max_shots_per_call": 1, "timestamp_accuracy_s": 1.0},
+  "references": {"images_max": 1, "videos_max": 0, "audio_max": 0, "video_total_s_max": 0, "audio_total_s_max": 0, "audio_requires_image": false, "recommended_images": [1, 1], "recommended_videos": [0, 0], "tag_regex": null, "roles": ["first_frame"]},
+  "control": {"first_frame": true, "last_frame": false, "returns_last_frame": false, "video_reference_camera": false, "structure_reference": [], "edit_by_timestamp": false, "seed": false, "camera_lock_param": null},
+  "audio": {"native": false, "dialogue_lip_sync": false, "sample_rate_hz": null, "languages_claimed": [], "languages_tested": []},
+  "prompt": {"template": "SUBJECT>ACTION>ENVIRONMENT>CAMERA>LOOK>AUDIO>AVOID", "words_per_block": [40, 90], "max_words_per_dialogue_line": 12, "dialogue_format": "", "language_notes": "", "negative_prompt_field": false},
+  "policy": {"real_faces": "unknown", "photoreal_ai_faces": "unknown", "ip_characters": "unknown", "watermark": "", "c2pa": false, "commercial_use": ""},
+  "ingest": {"extra_frames": 0, "resample_audio_hz": 48000, "url_expiry_h": null},
+  "known_weaknesses": [],
+  "open_questions": [],
+  "knowledge": "knowledge.md"
+}

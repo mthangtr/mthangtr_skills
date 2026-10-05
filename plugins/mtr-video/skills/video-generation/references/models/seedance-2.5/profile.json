@@ -1,0 +1,60 @@
+{
+  "id": "seedance-2.5",
+  "name": "Seedance 2.5",
+  "vendor": "ByteDance Seed",
+  "released": "2026-07-31",
+  "verified_as_of": "2026-10-02",
+  "verification": "third_party_docs",
+  "access": [
+    {"provider": "BytePlus ModelArk", "kind": "api", "adapter": "seedance-2.5",
+     "price_usd_per_s": {"480p": 0.1028, "720p": 0.2312}, "bills_reference_video_seconds": true,
+     "regions_excluded": ["US", "CA", "UK", "AU", "NZ"], "notes": "Model id reported as dreamina-seedance-2-5-260628; confirm in console (T2)"},
+    {"provider": "Replicate", "kind": "api", "adapter": null, "price_usd_per_s": {"480p": 0.1028, "720p": 0.2312}},
+    {"provider": "Apiframe", "kind": "api", "adapter": null, "price_usd_per_s": {"480p": 0.15, "720p": 0.34}},
+    {"provider": "fal", "kind": "api", "adapter": null, "price_usd_per_s": {"480p": 0.22, "720p": 0.47}},
+    {"provider": "Jimeng AI / Dreamina / Doubao Pro", "kind": "ui", "adapter": null}
+  ],
+  "output": {
+    "fps": [24],
+    "resolutions": ["480p", "720p"],
+    "native_max_resolution": "720p",
+    "ratios": ["16:9", "9:16", "1:1", "4:3", "3:4", "21:9"],
+    "duration_s": {"min": 4, "max": 30},
+    "extension": true,
+    "container": "mp4 (H.264, AAC)"
+  },
+  "shots": {"multi_shot_in_call": true, "timecode_prompting": true, "min_shot_s": 3, "max_shots_per_call": 6, "timestamp_accuracy_s": 1.0},
+  "references": {
+    "images_max": 30, "videos_max": 10, "audio_max": 10,
+    "video_total_s_max": 30, "audio_total_s_max": 30, "audio_requires_image": true,
+    "recommended_images": [3, 5], "recommended_videos": [1, 2],
+    "tag_regex": "@(?:Image|Video|Audio)\\d+",
+    "roles": ["reference_image", "reference_video", "reference_audio", "first_frame", "last_frame"]
+  },
+  "control": {
+    "first_frame": true, "last_frame": true, "returns_last_frame": true,
+    "video_reference_camera": true, "structure_reference": ["clay", "seg"],
+    "edit_by_timestamp": true, "seed": true, "camera_lock_param": null
+  },
+  "audio": {"native": true, "dialogue_lip_sync": true, "sample_rate_hz": 32000, "languages_claimed": ["en", "zh", "vi"], "languages_tested": []},
+  "prompt": {
+    "template": "FORMAT>REFERENCES>WORLD>TIMELINE>LOOK>AUDIO>KEEP>AVOID",
+    "words_per_block": [25, 50],
+    "max_words_per_dialogue_line": 15,
+    "dialogue_format": "NAME says: \"line\" — OTHER listens, mouth closed",
+    "language_notes": "One language per prompt; if English is flagged, translate the whole prompt to Chinese, keep dialogue in the spoken language",
+    "negative_prompt_field": false
+  },
+  "policy": {"real_faces": "asset_library_only", "photoreal_ai_faces": "sometimes_blocked", "ip_characters": "blocked", "watermark": "provider dependent", "c2pa": true, "commercial_use": "check provider terms"},
+  "ingest": {"extra_frames": 1, "resample_audio_hz": 48000, "url_expiry_h": 24},
+  "known_weaknesses": ["complex motion physics", "multi-subject interaction", "hands", "on-screen text", "identity drift late in 30 s clips", "pixelation in close-ups at 720p"],
+  "open_questions": [
+    {"test": "T1", "question": "Actual output resolution per provider (480p/720p vs claimed 1080p/4K)"},
+    {"test": "T2", "question": "Model id, camera_fixed support, default duration"},
+    {"test": "T3", "question": "Clay vs clay+depth vs clay+seg as structure reference"},
+    {"test": "T5", "question": "first_frame together with a reference video"},
+    {"test": "T6", "question": "Vietnamese dialogue quality and lip-sync"},
+    {"test": "T7", "question": "Are photoreal AI faces blocked"}
+  ],
+  "knowledge": "knowledge.md"
+}

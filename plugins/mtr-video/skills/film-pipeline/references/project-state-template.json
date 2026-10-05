@@ -1,0 +1,72 @@
+{
+  "project": "",
+  "created": "",
+  "format": {
+    "type": "narrative_short",
+    "platform": "youtube",
+    "runtime_s": 0,
+    "aspect_ratio": "16:9",
+    "fps": 24
+  },
+  "budget": {
+    "currency": "USD",
+    "generation_cap": 0,
+    "spent": 0
+  },
+  "current_step": 1,
+  "gates": {
+    "1_concept": {
+      "passed": false,
+      "date": null,
+      "notes": ""
+    },
+    "2_story": {
+      "passed": false,
+      "date": null,
+      "notes": ""
+    },
+    "3_visual_bible": {
+      "passed": false,
+      "date": null,
+      "notes": ""
+    },
+    "4_shot_design": {
+      "passed": false,
+      "date": null,
+      "notes": ""
+    },
+    "5_previs": {
+      "passed": false,
+      "date": null,
+      "units_done": [],
+      "units_stale": []
+    },
+    "6_generation": {
+      "passed": false,
+      "date": null,
+      "units_done": []
+    },
+    "7_review": {
+      "passed": false,
+      "date": null,
+      "units_circled": []
+    },
+    "8_post": {
+      "passed": false,
+      "date": null,
+      "qc_report": null
+    }
+  },
+  "validation_tests": {
+    "pipeline": {
+      "T8": null,
+      "T9": null,
+      "T10": null
+    },
+    "models": {}
+  },
+  "overrides": [],
+  "consent_log": [],
+  "shotlist_revision": 1,
+  "video_models": []
+}

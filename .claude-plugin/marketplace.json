@@ -1,0 +1,26 @@
+{
+  "name": "mtr-skills",
+  "owner": {
+    "name": "mthangtr"
+  },
+  "plugins": [
+    {
+      "name": "mtr-business",
+      "source": "./plugins/mtr-business",
+      "description": "Startup idea validation and go-to-market strategy."
+    },
+    {
+      "name": "mtr-design",
+      "source": "./plugins/mtr-design",
+      "description": "Premium app icon design (SVG)."
+    },
+    {
+      "name": "mtr-video",
+      "source": "./plugins/mtr-video",
+      "description": "AI film/video production pipeline and motion video making."
+    }
+  ],
+  "metadata": {
+    "description": "Personal Claude Code plugins by mthangtr: business, design, video."
+  }
+}

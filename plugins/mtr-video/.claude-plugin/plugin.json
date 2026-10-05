@@ -1,0 +1,16 @@
+{
+  "name": "mtr-video",
+  "version": "0.3.0",
+  "description": "End-to-end AI filmmaking pipeline, model-agnostic: concept, story, visual bible, shot design, Blender previs, video generation, dailies review and post-production. Also: making motion videos (HTML-rendered motion graphics).",
+  "author": {
+    "name": "mthangtr"
+  },
+  "keywords": [
+    "film",
+    "video",
+    "previs",
+    "blender",
+    "video-generation",
+    "post-production"
+  ]
+}

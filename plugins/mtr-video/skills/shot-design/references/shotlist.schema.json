@@ -1,0 +1,1117 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ai-film-studio/shotlist.schema.json",
+  "title": "shotlist",
+  "type": "object",
+  "required": [
+    "version",
+    "project",
+    "film",
+    "characters",
+    "scenes",
+    "units",
+    "shots",
+    "revision"
+  ],
+  "properties": {
+    "version": {
+      "const": "1.0"
+    },
+    "project": {
+      "type": "string"
+    },
+    "film": {
+      "type": "object",
+      "required": [
+        "aspect_ratio",
+        "fps",
+        "target_runtime_s",
+        "genre",
+        "platform",
+        "gen_ratio",
+        "video_model"
+      ],
+      "properties": {
+        "aspect_ratio": {
+          "enum": [
+            "2.39:1",
+            "1.85:1",
+            "16:9",
+            "9:16",
+            "4:3",
+            "1:1"
+          ],
+          "description": "Delivery aspect ratio (crop/letterbox in post)"
+        },
+        "fps": {
+          "enum": [
+            24,
+            25,
+            30
+          ],
+          "description": "Project frame rate. Prefer the active model's output fps; other outputs are conformed in post."
+        },
+        "target_runtime_s": {
+          "type": "number"
+        },
+        "genre": {
+          "enum": [
+            "drama",
+            "thriller",
+            "horror",
+            "comedy",
+            "action",
+            "romance",
+            "scifi",
+            "fantasy",
+            "documentary_style",
+            "music_video",
+            "commercial"
+          ]
+        },
+        "platform": {
+          "enum": [
+            "festival",
+            "youtube",
+            "vertical_social",
+            "streaming"
+          ]
+        },
+        "asl_target_s": {
+          "type": "number"
+        },
+        "lighting_arc": {
+          "type": "string"
+        },
+        "lens_family": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        },
+        "gen_ratio": {
+          "type": "string",
+          "pattern": "^[0-9]+(\\.[0-9]+)?:[0-9]+$",
+          "description": "Ratio sent to the video model; must be in the profile's output.ratios and contain the delivery frame"
+        },
+        "video_model": {
+          "type": "string",
+          "description": "Default model profile id (folder under video-generation/references/models/)"
+        }
+      }
+    },
+    "characters": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "identity_anchor",
+          "height_m",
+          "identity_block"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^C[0-9]{2}$"
+          },
+          "name": {
+            "type": "string"
+          },
+          "identity_anchor": {
+            "type": "string",
+            "description": "Verbatim from visual-bible; repeated in every unit prompt"
+          },
+          "reference_images": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "wardrobe_state_default": {
+            "type": "string"
+          },
+          "height_m": {
+            "type": "number",
+            "minimum": 0.3,
+            "maximum": 2.5
+          },
+          "identity_block": {
+            "type": "string",
+            "description": "Verbatim from 02_bible/descriptors.yaml"
+          },
+          "costume_block": {
+            "type": "string",
+            "description": "Verbatim from 02_bible/descriptors.yaml"
+          },
+          "voice_ref": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "scenes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "location",
+          "time_of_day",
+          "pov_owner",
+          "camera_stance",
+          "breakdown",
+          "lighting",
+          "axis",
+          "location_id"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^S[0-9]{2}$"
+          },
+          "location": {
+            "type": "string"
+          },
+          "time_of_day": {
+            "enum": [
+              "dawn",
+              "morning",
+              "day",
+              "golden_hour",
+              "dusk",
+              "blue_hour",
+              "night"
+            ]
+          },
+          "interior": {
+            "type": "boolean"
+          },
+          "pov_owner": {
+            "type": "string",
+            "description": "character id or 'audience'"
+          },
+          "camera_stance": {
+            "enum": [
+              "objective",
+              "subjective",
+              "objective_to_subjective",
+              "subjective_to_objective"
+            ]
+          },
+          "information_strategy": {
+            "enum": [
+              "suspense",
+              "mystery",
+              "surprise",
+              "dramatic_irony"
+            ]
+          },
+          "breakdown": {
+            "type": "object",
+            "required": [
+              "opening_value",
+              "closing_value",
+              "turning_point_beat",
+              "beats"
+            ],
+            "properties": {
+              "conflict": {
+                "type": "string"
+              },
+              "opening_value": {
+                "type": "string"
+              },
+              "closing_value": {
+                "type": "string"
+              },
+              "turning_point_beat": {
+                "type": "string"
+              },
+              "beats": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "id",
+                    "summary",
+                    "intentions"
+                  ],
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "summary": {
+                      "type": "string"
+                    },
+                    "is_turning_point": {
+                      "type": "boolean"
+                    },
+                    "intentions": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "character",
+                          "objective",
+                          "action_verb"
+                        ],
+                        "properties": {
+                          "character": {
+                            "type": "string"
+                          },
+                          "objective": {
+                            "type": "string"
+                          },
+                          "action_verb": {
+                            "type": "string"
+                          },
+                          "obstacle": {
+                            "type": "string"
+                          },
+                          "fact": {
+                            "type": "string"
+                          },
+                          "subtext": {
+                            "type": "string"
+                          },
+                          "physical_task": {
+                            "type": "string"
+                          },
+                          "status": {
+                            "enum": [
+                              "high",
+                              "low",
+                              "equal",
+                              "rising",
+                              "falling"
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "blocking": {
+            "type": "object",
+            "properties": {
+              "pattern": {
+                "enum": [
+                  "i",
+                  "a",
+                  "l",
+                  "triangle",
+                  "line",
+                  "face_to_face",
+                  "back_turned",
+                  "back_to_back",
+                  "solo",
+                  "group"
+                ]
+              },
+              "marks": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "character",
+                    "mark_id",
+                    "position_m",
+                    "facing_deg"
+                  ],
+                  "properties": {
+                    "character": {
+                      "type": "string"
+                    },
+                    "mark_id": {
+                      "type": "string"
+                    },
+                    "position_m": {
+                      "type": "array",
+                      "items": {
+                        "type": "number"
+                      },
+                      "minItems": 3,
+                      "maxItems": 3
+                    },
+                    "facing_deg": {
+                      "type": "number",
+                      "description": "Yaw around Z, 0 = +Y"
+                    },
+                    "pose": {
+                      "enum": [
+                        "standing",
+                        "sitting",
+                        "kneeling",
+                        "lying",
+                        "walking",
+                        "leaning"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "axis": {
+            "type": "object",
+            "required": [
+              "from",
+              "to"
+            ],
+            "properties": {
+              "from": {
+                "type": "string"
+              },
+              "to": {
+                "type": "string"
+              },
+              "camera_side": {
+                "enum": [
+                  "left_of_axis",
+                  "right_of_axis"
+                ]
+              }
+            }
+          },
+          "lighting": {
+            "type": "object",
+            "required": [
+              "key_style",
+              "key_fill_ratio",
+              "motivated_source",
+              "key_kelvin"
+            ],
+            "properties": {
+              "key_style": {
+                "enum": [
+                  "high_key",
+                  "naturalistic",
+                  "low_key",
+                  "silhouette"
+                ]
+              },
+              "key_fill_ratio": {
+                "type": "string",
+                "pattern": "^[0-9]+:[0-9]+$"
+              },
+              "motivated_source": {
+                "type": "string"
+              },
+              "source_direction": {
+                "enum": [
+                  "camera_left",
+                  "camera_right",
+                  "top",
+                  "back",
+                  "front",
+                  "under"
+                ]
+              },
+              "key_side": {
+                "enum": [
+                  "short_side",
+                  "broad_side",
+                  "rembrandt",
+                  "butterfly",
+                  "split",
+                  "rim_only"
+                ]
+              },
+              "key_quality": {
+                "enum": [
+                  "hard",
+                  "soft"
+                ]
+              },
+              "key_kelvin": {
+                "type": "integer"
+              },
+              "ambient_kelvin": {
+                "type": "integer"
+              },
+              "practicals": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "atmosphere": {
+                "enum": [
+                  "none",
+                  "light_haze",
+                  "smoke",
+                  "fog",
+                  "rain",
+                  "dust"
+                ]
+              }
+            }
+          },
+          "location_id": {
+            "type": "string",
+            "pattern": "^LOC[0-9]{2}$"
+          },
+          "props": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "pattern": "^PR[0-9]{2}$"
+                },
+                "state": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "units": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "scene",
+          "shot_ids",
+          "duration_s",
+          "continuity_anchors"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^U[0-9]{2}$"
+          },
+          "scene": {
+            "type": "string"
+          },
+          "shot_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1,
+            "description": "Max count comes from the profile (shots.max_shots_per_call)"
+          },
+          "duration_s": {
+            "type": "number",
+            "maximum": 30
+          },
+          "priority": {
+            "enum": [
+              "hero",
+              "standard",
+              "connective"
+            ]
+          },
+          "reference_mode": {
+            "enum": [
+              "text_only",
+              "image_ref",
+              "previs_video_ref",
+              "multi_angle_from_take"
+            ]
+          },
+          "previs_ref": {
+            "type": "string",
+            "description": "path to Blender render for this unit"
+          },
+          "continuity_anchors": {
+            "type": "object",
+            "properties": {
+              "characters_in_frame": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "screen_positions": {
+                "type": "object",
+                "additionalProperties": {
+                  "enum": [
+                    "frame_left",
+                    "frame_center",
+                    "frame_right"
+                  ]
+                }
+              },
+              "wardrobe_state": {
+                "type": "string"
+              },
+              "prop_state": {
+                "type": "string"
+              },
+              "lighting_state": {
+                "type": "string"
+              }
+            }
+          },
+          "handoff_in": {
+            "type": "string",
+            "description": "state/action carried from previous unit"
+          },
+          "handoff_out": {
+            "type": "string"
+          },
+          "mouth_map": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "character": {
+                  "type": "string"
+                },
+                "talk_s": {
+                  "type": "array",
+                  "items": {
+                    "type": "number"
+                  },
+                  "minItems": 2,
+                  "maxItems": 2
+                }
+              }
+            }
+          },
+          "status": {
+            "enum": [
+              "planned",
+              "previs_done",
+              "generated",
+              "circled",
+              "stale"
+            ]
+          },
+          "gen_ratio_override": {
+            "type": "string",
+            "pattern": "^[0-9]+(\\.[0-9]+)?:[0-9]+$"
+          },
+          "video_model": {
+            "type": "string",
+            "description": "Overrides film.video_model for this unit"
+          }
+        }
+      }
+    },
+    "shots": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "scene",
+          "unit",
+          "beat",
+          "unit_time_s",
+          "duration_s",
+          "type",
+          "size",
+          "angle",
+          "lens_mm",
+          "camera",
+          "composition",
+          "action",
+          "performance",
+          "edit"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^S[0-9]{2}_[0-9]{3}$"
+          },
+          "scene": {
+            "type": "string"
+          },
+          "unit": {
+            "type": "string"
+          },
+          "beat": {
+            "type": "string"
+          },
+          "unit_time_s": {
+            "type": "array",
+            "items": {
+              "type": "number"
+            },
+            "minItems": 2,
+            "maxItems": 2,
+            "description": "[start,end] inside the unit"
+          },
+          "duration_s": {
+            "type": "number",
+            "minimum": 0.5,
+            "description": "Generated segment length; must be >= the profile's shots.min_shot_s. Cut shorter in post via edit.target_cut_s."
+          },
+          "handle_s": {
+            "type": "number",
+            "default": 0,
+            "description": "Extra tail seconds generated inside the unit (unit tail or before a planned match cut). unit_time_s spans duration_s + handle_s."
+          },
+          "purpose": {
+            "type": "string",
+            "description": "One sentence: what the audience must get from this shot"
+          },
+          "type": {
+            "enum": [
+              "master",
+              "establishing",
+              "single",
+              "two_shot",
+              "group",
+              "ots",
+              "pov",
+              "reaction",
+              "insert",
+              "cutaway"
+            ]
+          },
+          "size": {
+            "enum": [
+              "ews",
+              "ws",
+              "fs",
+              "mws",
+              "cowboy",
+              "ms",
+              "mcu",
+              "cu",
+              "ecu"
+            ]
+          },
+          "angle": {
+            "enum": [
+              "eye_level",
+              "shoulder_level",
+              "high",
+              "low",
+              "overhead",
+              "ground",
+              "dutch",
+              "aerial"
+            ]
+          },
+          "camera_height_m": {
+            "type": "number"
+          },
+          "lens_mm": {
+            "type": "number",
+            "minimum": 10,
+            "maximum": 300
+          },
+          "dof": {
+            "enum": [
+              "deep",
+              "medium",
+              "shallow"
+            ]
+          },
+          "focus": {
+            "type": "object",
+            "properties": {
+              "start": {
+                "type": "string"
+              },
+              "end": {
+                "type": "string"
+              },
+              "rack_at_s": {
+                "type": "number"
+              }
+            }
+          },
+          "camera": {
+            "type": "object",
+            "required": [
+              "move",
+              "rig"
+            ],
+            "properties": {
+              "move": {
+                "enum": [
+                  "static",
+                  "pan",
+                  "tilt",
+                  "push_in",
+                  "pull_out",
+                  "track",
+                  "truck",
+                  "arc",
+                  "crane_up",
+                  "crane_down",
+                  "handheld",
+                  "whip_pan",
+                  "zoom",
+                  "dolly_zoom"
+                ]
+              },
+              "rig": {
+                "enum": [
+                  "tripod",
+                  "dolly",
+                  "slider",
+                  "steadicam",
+                  "handheld",
+                  "crane",
+                  "drone"
+                ]
+              },
+              "direction": {
+                "type": "string"
+              },
+              "speed": {
+                "enum": [
+                  "imperceptible",
+                  "slow",
+                  "medium",
+                  "fast"
+                ]
+              },
+              "start_m": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                },
+                "minItems": 3,
+                "maxItems": 3
+              },
+              "end_m": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                },
+                "minItems": 3,
+                "maxItems": 3
+              },
+              "motivation": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "enum": [
+                      "none_static",
+                      "subject",
+                      "reveal",
+                      "emotion_turn",
+                      "pov"
+                    ]
+                  },
+                  "reason": {
+                    "type": "string"
+                  }
+                }
+              },
+              "move_starts_on": {
+                "type": "string"
+              },
+              "speed_ramp": {
+                "type": "number",
+                "default": 1.0,
+                "description": "<1 = slow motion"
+              }
+            }
+          },
+          "composition": {
+            "type": "object",
+            "properties": {
+              "subject_position": {
+                "enum": [
+                  "left_third",
+                  "center",
+                  "right_third"
+                ]
+              },
+              "lead_room": {
+                "enum": [
+                  "normal",
+                  "short_sided",
+                  "none"
+                ]
+              },
+              "depth_layers": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "frame_in_frame": {
+                "type": "boolean"
+              },
+              "eye_trace_in": {
+                "enum": [
+                  "tl",
+                  "tc",
+                  "tr",
+                  "ml",
+                  "mc",
+                  "mr",
+                  "bl",
+                  "bc",
+                  "br"
+                ]
+              },
+              "eye_trace_out": {
+                "enum": [
+                  "tl",
+                  "tc",
+                  "tr",
+                  "ml",
+                  "mc",
+                  "mr",
+                  "bl",
+                  "bc",
+                  "br"
+                ]
+              }
+            }
+          },
+          "action": {
+            "type": "object",
+            "required": [
+              "primary",
+              "complexity"
+            ],
+            "properties": {
+              "primary": {
+                "type": "string",
+                "description": "ONE observable action"
+              },
+              "complexity": {
+                "enum": [
+                  "low",
+                  "medium",
+                  "high"
+                ]
+              },
+              "screen_direction": {
+                "enum": [
+                  "l_to_r",
+                  "r_to_l",
+                  "toward_cam",
+                  "away_from_cam",
+                  "none"
+                ]
+              },
+              "dialogue": {
+                "type": "string"
+              },
+              "speaker": {
+                "type": "string"
+              }
+            }
+          },
+          "eyeline": {
+            "type": "object",
+            "properties": {
+              "character": {
+                "type": "string"
+              },
+              "target": {
+                "type": "string",
+                "description": "character id, object, 'off_left', 'off_right', or 'lens'"
+              },
+              "side_of_lens": {
+                "enum": [
+                  "left",
+                  "right",
+                  "above",
+                  "below",
+                  "on_lens"
+                ]
+              },
+              "fourth_wall_intent": {
+                "type": "boolean",
+                "default": false
+              }
+            }
+          },
+          "performance": {
+            "type": "object",
+            "required": [
+              "character",
+              "intention",
+              "observable_behavior",
+              "intensity"
+            ],
+            "properties": {
+              "character": {
+                "type": "string"
+              },
+              "intention": {
+                "type": "string",
+                "description": "action verb + objective (not an adjective)"
+              },
+              "subtext": {
+                "type": "string"
+              },
+              "observable_behavior": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "facs_aus": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "intensity": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 5
+              },
+              "micro_leak": {
+                "type": "object",
+                "properties": {
+                  "emotion": {
+                    "type": "string"
+                  },
+                  "at_s": {
+                    "type": "number"
+                  },
+                  "dur_s": {
+                    "type": "number",
+                    "maximum": 0.5
+                  }
+                }
+              },
+              "thought_complete_at_s": {
+                "type": "number"
+              },
+              "avoid": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "lighting_override": {
+            "type": "object"
+          },
+          "edit": {
+            "type": "object",
+            "properties": {
+              "cut_in": {
+                "enum": [
+                  "cut",
+                  "match_on_action",
+                  "j_cut",
+                  "l_cut",
+                  "dissolve",
+                  "smash_cut",
+                  "fade_in"
+                ]
+              },
+              "cut_out": {
+                "enum": [
+                  "cut",
+                  "match_on_action",
+                  "j_cut",
+                  "l_cut",
+                  "dissolve",
+                  "smash_cut",
+                  "fade_out"
+                ]
+              },
+              "audio_lead_s": {
+                "type": "number"
+              },
+              "audio_tail_s": {
+                "type": "number"
+              },
+              "coverage_alt": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "axis_break_intent": {
+                "type": "boolean",
+                "default": false
+              },
+              "target_cut_s": {
+                "type": "number",
+                "minimum": 0.3,
+                "description": "Planned on-screen length after trimming in post (may be < duration_s)"
+              }
+            }
+          },
+          "continuity": {
+            "type": "object",
+            "properties": {
+              "props": {
+                "type": "string"
+              },
+              "wardrobe": {
+                "type": "string"
+              },
+              "notes": {
+                "type": "string"
+              }
+            }
+          },
+          "ai_risk": {
+            "type": "array",
+            "items": {
+              "enum": [
+                "identity_drift",
+                "hands",
+                "multi_subject_contact",
+                "text",
+                "object_rotation",
+                "fast_motion",
+                "camera_drift",
+                "lip_sync",
+                "eyeline"
+              ]
+            }
+          },
+          "sfx": {
+            "type": "string"
+          },
+          "ambience": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "revision": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Bump on every change after previs starts; downstream units touched get status=stale"
+    },
+    "changelog": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "revision": {
+            "type": "integer"
+          },
+          "date": {
+            "type": "string"
+          },
+          "change": {
+            "type": "string"
+          },
+          "units_affected": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+}
