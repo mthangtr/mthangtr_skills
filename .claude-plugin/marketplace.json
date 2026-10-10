@@ -18,9 +18,14 @@
       "name": "mtr-video",
       "source": "./plugins/mtr-video",
       "description": "AI film/video production pipeline and motion video making."
+    },
+    {
+      "name": "mtr-game",
+      "source": "./plugins/mtr-game",
+      "description": "Game design doc sets and 2D/3D game graphics techniques."
     }
   ],
   "metadata": {
-    "description": "Personal Claude Code plugins by mthangtr: business, design, video."
+    "description": "Personal Claude Code plugins by mthangtr: business, design, video, game."
   }
 }

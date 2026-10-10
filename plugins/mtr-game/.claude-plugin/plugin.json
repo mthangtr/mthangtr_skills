@@ -1,0 +1,17 @@
+{
+  "name": "mtr-game",
+  "version": "0.1.0",
+  "description": "Game development: turn a game idea into an implementation-ready design doc set (research, grill, GDD, specs), and choose/implement/optimize 2D and 3D rendering and VFX techniques.",
+  "author": {
+    "name": "mthangtr"
+  },
+  "keywords": [
+    "game",
+    "game-design",
+    "gdd",
+    "graphics",
+    "rendering",
+    "shaders",
+    "vfx"
+  ]
+}
