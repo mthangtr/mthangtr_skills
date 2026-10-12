@@ -23,9 +23,14 @@
       "name": "mtr-game",
       "source": "./plugins/mtr-game",
       "description": "Game design doc sets and 2D/3D game graphics techniques."
+    },
+    {
+      "name": "mtr-marketing",
+      "source": "./plugins/mtr-marketing",
+      "description": "Evidence-led ad creative generation and benchmarking."
     }
   ],
   "metadata": {
-    "description": "Personal Claude Code plugins by mthangtr: business, design, video, game."
+    "description": "Personal Claude Code plugins by mthangtr: business, design, video, game, marketing."
   }
 }

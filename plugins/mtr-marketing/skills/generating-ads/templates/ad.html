@@ -1,0 +1,73 @@
+<!doctype html>
+<!--
+  Ad canvas template. Contract the scripts rely on:
+  - body IS the canvas: exact width/height in px (set --w/--h), overflow hidden, no scroll.
+  - data-aoi on key elements: brand, headline, product, cta, offer, proof, face, legal.
+  - Fonts are local files (fonts/…) or system fonts, so renders are deterministic offline.
+  - One accent colour (--accent) used ONLY on the CTA (and optionally the price badge).
+  - Append ?guides=meta_story_9x16 (or tiktok_9x16) to the file URL while designing to see unsafe bands.
+  Recompose per ratio (copy this file per placement); never scale one layout into every size.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="ad.size" content="width=1080,height=1350">
+<style>
+  @font-face { font-family: "Display"; src: url("fonts/Display.ttf"); font-display: block; }
+  @font-face { font-family: "Text"; src: url("fonts/Text.ttf"); font-display: block; }
+  :root {
+    --w: 1080px; --h: 1350px;              /* canvas */
+    --m: 72px;                             /* inner margin ≈ 6-7% of short side */
+    --bg: #F3EDE4;                         /* dominant 60% */
+    --ink: #1B1A17;                        /* secondary 30% */
+    --accent: #C93A20;                     /* ≤10%, CTA only */
+    --on-accent: #FFFFFF;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: var(--w); height: var(--h); overflow: hidden; }
+  body { background: var(--bg); color: var(--ink); font-family: "Text", system-ui, sans-serif;
+         -webkit-font-smoothing: antialiased; position: relative; }
+
+  .brand    { position: absolute; top: var(--m); left: var(--m); height: 56px; display: flex; align-items: center; gap: 14px;
+              font: 700 34px/1 "Text", sans-serif; letter-spacing: .01em; }
+  .brand svg{ height: 56px; width: 56px; }
+  .headline { position: absolute; left: var(--m); right: var(--m); top: 190px;
+              font: 400 118px/0.98 "Display", sans-serif; letter-spacing: -0.01em; text-wrap: balance; }
+  .product  { position: absolute; left: 50%; bottom: 250px; width: 640px; height: 520px; transform: translateX(-50%);
+              filter: drop-shadow(0 30px 40px rgba(0,0,0,.18)); }
+  .product img, .product svg { width: 100%; height: 100%; object-fit: contain; }
+  .proof    { position: absolute; left: var(--m); bottom: 168px; font: 500 34px/1.25 "Text", sans-serif; }
+  .cta      { position: absolute; right: var(--m); bottom: 150px; padding: 26px 44px; border-radius: 14px;
+              background: var(--accent); color: var(--on-accent); font: 700 38px/1 "Text", sans-serif; }
+  .legal    { position: absolute; left: var(--m); right: var(--m); bottom: 64px; font: 400 24px/1.3 "Text", sans-serif; opacity: .8; }
+
+  /* design-time guides, never rendered by render.py (no query string there) */
+  .guide { position: absolute; left: 0; right: 0; background: rgba(255,0,0,.25); pointer-events: none; z-index: 99; }
+</style>
+</head>
+<body>
+  <div class="brand" data-aoi="brand">
+    <svg viewBox="0 0 56 56" aria-hidden="true"><circle cx="28" cy="28" r="26" fill="var(--ink)"/><path d="M16 30l8 8 16-18" stroke="var(--bg)" stroke-width="6" fill="none" stroke-linecap="round"/></svg>
+    Brandname
+  </div>
+
+  <h1 class="headline" data-aoi="headline">Front-load the benefit in ≤8 words</h1>
+
+  <div class="product" data-aoi="product">
+    <!-- Real product photo/cutout from the user (img src="assets/product.png") beats any drawing.
+         If none was supplied, use a clearly-placeholder SVG and list it as a REQUIRED ASSET in the report. -->
+    <svg viewBox="0 0 640 520"><rect x="120" y="40" width="400" height="440" rx="36" fill="#2B2925"/><text x="320" y="270" fill="#F3EDE4" font-size="36" text-anchor="middle" font-family="Text">PRODUCT PHOTO</text></svg>
+  </div>
+
+  <p class="proof" data-aoi="proof">4.8★ from 12,417 reviews</p>
+  <div class="cta" data-aoi="cta">Start free trial</div>
+  <p class="legal" data-aoi="legal">Offer terms go here. Real, verifiable claims only.</p>
+
+<script>
+  // ?guides=<placement> overlays the unsafe bands while designing (render.py never adds it).
+  const g = new URLSearchParams(location.search).get('guides');
+  const bands = { meta_story_9x16: [[0,269],[1248,1920]], tiktok_9x16: [[0,240],[1260,1920]] }[g] || [];
+  for (const [a,b] of bands) { const d = document.createElement('div'); d.className = 'guide'; d.style.top = a+'px'; d.style.height = (b-a)+'px'; document.body.appendChild(d); }
+</script>
+</body>
+</html>
